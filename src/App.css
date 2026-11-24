@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+
+/* Light theme: the whole app is drawn with dark colours, so light mode inverts them (hue kept the same) and
+   turns photos / videos back to normal. Toggled by the class on <html> (see lib/theme.js). */
+html.light { filter: invert(1) hue-rotate(180deg); }
+html.light img,
+html.light video,
+html.light canvas,
+html.light iframe,
+html.light [data-keep-colors] { filter: invert(1) hue-rotate(180deg); }
+html { transition: background-color 0.2s; }
+
+/* Reporting Hierarchy tree: connector lines between parent and children (see pages/shared/ReportingHierarchy.jsx) */
+.qc-tree { --line: rgba(96, 165, 250, 0.45); }
+.qc-tree ul { display: flex; justify-content: center; margin: 0; padding: 26px 0 0; position: relative; list-style: none; }
+.qc-tree > div > ul { padding-top: 24px; }
+.qc-tree li { position: relative; display: flex; flex-direction: column; align-items: center; padding: 26px 10px 0; list-style: none; }
+.qc-tree li::before, .qc-tree li::after { content: ""; position: absolute; top: 0; right: 50%; width: 50%; height: 26px; border-top: 2px solid var(--line); }
+.qc-tree li::after { right: auto; left: 50%; border-left: 2px solid var(--line); }
+.qc-tree li:only-child::before, .qc-tree li:only-child::after { display: none; }
+.qc-tree li:only-child { padding-top: 0; }
+.qc-tree li:first-child::before, .qc-tree li:last-child::after { border: 0 none; }
+.qc-tree li:last-child::before { border-right: 2px solid var(--line); border-radius: 0 10px 0 0; }
+.qc-tree li:first-child::after { border-radius: 10px 0 0 0; }
+.qc-tree ul ul::before { content: ""; position: absolute; top: 0; left: 50%; height: 26px; border-left: 2px solid var(--line); }
+.qc-tree > div > ul > li { padding-top: 0; }
+.qc-tree > div > ul > li::before, .qc-tree > div > ul > li::after { display: none; }
